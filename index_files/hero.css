@@ -1,0 +1,226 @@
+/* mpto theme — hero */
+
+/* Hero — a full-bleed photo/video background that also shows through
+   the transparent header above it (see "body.home .site-header" in
+   header.css). Pulled up by its own height with a negative margin so
+   its background starts at the very top of the page, behind the
+   header, instead of only beginning below it — NOT by taking the
+   header out of flow into a shared wrapper (tried that; it broke
+   position:sticky, which only sticks while its own containing block —
+   that wrapper — is in view, so the header became permanently
+   unstickable the moment you scrolled past the ~1 screen-tall
+   wrapper). The header stays an ordinary static sibling of .mpto-hero
+   here, sticky across the *whole* page like before, and .mpto-hero's
+   own min-height/padding-top make up for the margin pulling it over
+   the header's own space. --header-height is set by main.js from the
+   header's own real offsetHeight, with 92px as the pre-JS fallback. */
+.mpto-hero {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	min-height: 100dvh;
+	margin-top: calc(-1 * var(--header-height, 92px));
+	overflow: hidden;
+	color: var(--white);
+}
+
+.mpto-hero__bg {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	/* body's own background is white (base.css) — without this, that's
+	   what shows through for the split second before anything here has
+	   painted (the blur-up placeholder is inline and near-instant, but
+	   this is the zero-cost fallback under it, not a substitute for it). */
+	background: var(--ink-strong);
+}
+
+.mpto-hero__bg img,
+.mpto-hero__bg video {
+	position: absolute;
+	inset: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.mpto-hero__bg::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: rgb(23 33 33 / 62%);
+}
+
+/* Blur-up placeholder (ported from onyca-digital's own pattern:
+   inc/media-webp.php's onyca_save_lqip_placeholder + assets/css/
+   components/lqip.css + main.js's initLqip) — not a from-scratch fix.
+   A tiny (24px-wide), heavily-compressed copy of the photo is inlined
+   as a data: URI straight in the HTML (see mpto_lqip_html() in
+   inc/site-settings.php), so it paints on the very first frame with
+   zero network request — no gap where the hero is briefly unstyled
+   white, which is what caused the flash and the perceived text jump
+   on reload. Sits on top (z-index) of the real photo/video with its
+   own blur and a slight upscale (so the blurred edge doesn't show
+   past the real image's edge), then fades out once main.js's
+   initLqip() confirms the real media has actually loaded. */
+.mpto-lqip {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: blur(20px);
+	transform: scale(1.1);
+	transition: opacity .4s ease;
+	pointer-events: none;
+}
+
+.mpto-lqip.is-loaded {
+	opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.mpto-lqip {
+		transition: none;
+	}
+}
+
+.mpto-hero__inner {
+	position: relative;
+	z-index: 1;
+	flex: 1 1 auto;
+	display: flex;
+	align-items: center;
+	min-height: 0;
+	/* Top padding clears the transparent header overlapping this same
+	   box (.mpto-hero's negative margin-top pulls the box up behind
+	   it), so the copy never sits under the logo/nav. */
+	padding-block: calc(var(--header-height, 92px) + 36px) 16px;
+}
+
+.mpto-hero__copy {
+	max-width: 640px;
+}
+
+.mpto-hero__copy h1 {
+	margin: 0 0 22px;
+	color: var(--white);
+	font-family: var(--font-display);
+	font-size: clamp(34px, 4.2vw, 56px);
+	font-weight: 700;
+	letter-spacing: -.01em;
+}
+
+.mpto-hero__copy h1 em {
+	color: var(--accent);
+	font-style: normal;
+}
+
+.mpto-hero__lead {
+	max-width: 480px;
+	margin: 0 0 32px;
+	color: #c3cbca;
+	font-family: var(--font-body);
+	font-size: 16px;
+	line-height: 1.65;
+}
+
+.mpto-hero__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 14px;
+}
+
+.mpto-hero__capacity {
+	position: relative;
+	z-index: 1;
+	margin-top: auto;
+}
+
+.mpto-hero__capacity-row {
+	/* Flex + space-between, not a 4-column grid: the gap between numbers
+	   should flex with the available width so the row always spans edge
+	   to edge (first number at the left edge, last at the right), not a
+	   grid of equal fixed-width cells with empty space left over. */
+	display: flex;
+	justify-content: space-between;
+	gap: 24px;
+	max-width: var(--layout-width);
+	margin-inline: auto;
+	padding-inline: var(--container-padding);
+	padding-block: 20px 36px;
+}
+
+.mpto-hero__capacity-item {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.mpto-hero__capacity-item strong {
+	color: var(--accent);
+	font-family: var(--font-display);
+	font-size: clamp(34px, 4.2vw, 56px);
+	font-weight: 700;
+	line-height: 1;
+	letter-spacing: -.01em;
+}
+
+.mpto-hero__capacity-item span {
+	color: var(--white);
+	font-family: var(--font-body);
+	font-size: 16px;
+	line-height: 1.4;
+}
+
+
+.mpto-page-hero {
+	padding: 54px 0 50px;
+	color: var(--white);
+	background: var(--ink-strong);
+}
+
+.mpto-page-hero .breadcrumbs {
+	margin-bottom: 30px;
+	color: #9aa6a6;
+}
+
+.mpto-page-hero .breadcrumbs a:hover {
+	color: var(--white);
+}
+
+.mpto-page-hero h1 {
+	max-width: 760px;
+	margin: 14px 0 0;
+	color: var(--white);
+	font-size: clamp(36px, 5vw, 56px);
+	font-weight: 700;
+	line-height: 1.08;
+	letter-spacing: -.02em;
+}
+
+.mpto-page-hero__lead {
+	max-width: 560px;
+	margin: 18px 0 0;
+	color: #c1c6c3;
+	font-size: 15px;
+	line-height: 1.65;
+}
+
+@media (max-width: 760px) {
+	.mpto-hero__inner {
+		padding-block: calc(var(--header-height, 92px) + 20px) 20px;
+	}
+
+	.mpto-hero__capacity-row {
+		flex-wrap: wrap;
+		row-gap: 20px;
+	}
+
+	.mpto-hero__capacity-item {
+		flex: 0 0 calc(50% - 12px);
+	}
+}

@@ -1,0 +1,68 @@
+/* mpto theme — Y-axis cursor-follow preview for the homepage news list.
+   Ported from wemakefab.ru/cases' own inline script (found in that
+   page's source — GSAP/Lenis are loaded elsewhere on that site, but
+   this specific effect uses neither). Glides vertically only
+   (translateY, lerped) to roughly track the hovered row, clamped to
+   .mpto-news-row-list-wrap's own box — not the viewport — so it can
+   never drift outside the list while scrolling (see assets/js/main.js
+   for the same fix just applied to the older, X+Y directions-list
+   preview this is modeled on, not copied from: that one centers on
+   the cursor on both axes and fades out on mouseleave — this one only
+   moves on Y, stays on the row's own image column, and never hides).
+   Horizontally it isn't a separate column: main.js measures the first
+   row's own .mpto-news-row__image-slot (cards.css) and sets this
+   panel's left/width to match, so it visually sits in that row column
+   — between the text and the arrow — rather than off to the side. */
+
+.mpto-news-row-list-wrap {
+	position: relative;
+}
+
+.mpto-news-preview {
+	display: none;
+}
+
+@media (min-width: 1100px) {
+	.mpto-news-preview {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 2;
+		height: 280px;
+		overflow: hidden;
+		border-radius: 2px;
+		background: var(--ink-strong);
+		pointer-events: none;
+		will-change: transform;
+	}
+}
+
+.mpto-news-preview__frame {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.mpto-news-preview__media {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transition: opacity .35s ease;
+}
+
+.mpto-news-preview__media.is-current { opacity: 1; z-index: 1; }
+
+.mpto-news-preview__image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.mpto-news-preview,
+	.mpto-news-preview__media {
+		transition: none;
+	}
+}

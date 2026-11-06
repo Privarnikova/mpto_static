@@ -1,0 +1,105 @@
+/* mpto theme — contacts */
+
+
+
+.section--contacts { padding-top: 58px; }
+
+.contacts-layout { display: grid; grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr)); gap: var(--grid-gap); }
+
+.contacts-layout > .city-list { grid-column: span 2; }
+
+.contacts-layout > .contact-card { grid-column: span 4; }
+
+.city-list { display: grid; align-content: start; }
+
+.city-tab { display: flex; align-items: center; justify-content: space-between; min-height: 54px; padding: 0 15px; border: 0; border-bottom: 1px solid var(--line); color: var(--muted); background: transparent; text-align: left; cursor: pointer; }
+
+.city-tab:hover, .city-tab.is-active { color: var(--ink-strong); background: var(--accent-soft); }
+
+.city-tab.is-active { font-weight: 700; }
+
+.city-tab > span:last-child { color: var(--ink-strong); }
+
+.contact-card { min-height: 460px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); background: var(--white); }
+
+.contact-card__info { grid-column: span 2; }
+
+.contact-card .contacts-map { grid-column: span 4; }
+
+.contact-card__info { display: flex; flex-direction: column; align-items: flex-start; padding: 36px; }
+
+.contact-card__info h2 { margin: 0 0 27px; font-size: 32px; }
+
+.contact-card__item { margin-bottom: 18px; }
+
+.contact-card__label { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
+
+.contact-card__item p { margin: 4px 0 0; font-size: 13px; line-height: 1.55; }
+
+.contact-card__info > .text-link { margin-top: auto; padding-top: 12px; }
+
+.contacts-map { min-height: 460px; position: relative; overflow: hidden; background: var(--accent-soft); }
+
+.contacts-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+.contacts-map > script { display: none; }
+
+.contacts-map__placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 20px; color: var(--muted); background: radial-gradient(circle at center, var(--paper), var(--accent-soft)); font-size: 12px; text-align: center; }
+
+.contacts-map__pin { width: 43px; height: 43px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--ink-strong); font-size: 26px; }
+
+.section--contact-form { background: var(--paper); }
+
+.contact-form-layout { display: grid; grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr)); gap: var(--grid-gap); align-items: start; }
+
+.contact-form-layout > :first-child { grid-column: span 2; }
+
+.contact-form-layout h2 { margin: 0 0 18px; font-size: clamp(34px, 4vw, 48px); line-height: 1.08; }
+
+.contact-form-layout > div:first-child > p:not(.eyebrow) { max-width: 350px; color: var(--muted); font-size: 13px; }
+
+@media (max-width: 760px) {
+	.contacts-layout { grid-template-columns: 1fr; gap: 15px; }
+
+	.city-list { display: flex; overflow-x: auto; gap: 5px; padding-bottom: 7px; }
+
+	.city-tab { min-width: max-content; min-height: 42px; gap: 12px; padding: 0 13px; border: 1px solid var(--line); font-size: 12px; }
+
+	.contact-card { grid-template-columns: 1fr; }
+
+	.contact-card__info { padding: 26px; }
+
+	.contact-card__info > .text-link { margin-top: 5px; }
+
+	.contacts-map { min-height: 300px; }
+
+	.contacts-map iframe { min-height: 300px; }
+
+	.contact-form-layout { grid-template-columns: 1fr; gap: 30px; }
+}
+
+
+.contact-card { grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr)); }
+
+.contacts-layout > .city-list { grid-column: span 2; }
+
+.contacts-layout > .contact-card { grid-column: span 4; }
+
+.contact-card__info { grid-column: span 2; }
+
+.contact-card .contacts-map { grid-column: span 4; }
+
+.contact-form-layout > :first-child { grid-column: span 2; }
+
+
+@media (max-width: 1200px) {
+	.contact-card__info { grid-column: span 1; }
+
+	.contact-card .contacts-map { grid-column: span 3; }
+
+	.contact-form-layout > :first-child { grid-column: span 1; }
+}
+
+
+
+.mpto-inner-hero, .page-hero, .section--contact-form { background: var(--paper); }

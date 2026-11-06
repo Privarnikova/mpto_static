@@ -1,0 +1,160 @@
+/* mpto theme — tokens */
+
+/* PT Sans — the single typeface for the whole site (display and body alike),
+   distinguished only by weight. Utilitarian, Cyrillic-native (ParaType),
+   matches the "official industrial document" register without being a
+   system font. */
+@font-face {
+	font-family: 'PT Sans';
+	src: url('./pt-sans-regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'PT Sans';
+	src: url('./pt-sans-bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Preloading PT Sans (header.php) shrinks the gap before it's ready,
+   but doesn't close it — font-display: swap above still means text
+   renders in Arial first and then re-flows once PT Sans loads, which
+   is what was making the hero h1 visibly jump on load (hits different
+   browsers'/machines' timing differently — "every other time"). This
+   is the actual fix for that: a fallback face named 'PT Sans
+   Fallback', still rendered as the system's own Arial (nothing extra
+   downloaded), but with its box metrics (ascent/descent/line-gap/
+   average width) adjusted via *-override and size-adjust to match PT
+   Sans's own — so the swap from fallback to real font doesn't change
+   line count or line height, and there's nothing left to reflow.
+   Numbers computed from pt-sans-regular.woff2/pt-sans-bold.woff2's own
+   OS/2 and hhea tables (fontTools) against Arial's published metrics
+   (unitsPerEm 2048, ascent 1854, descent 434, xAvgCharWidth 904) —
+   this is the standard technique (Capsize/Fontaine/next/font), not a
+   guess, and needs recalculating only if the PT Sans files change. */
+@font-face {
+	font-family: 'PT Sans Fallback';
+	src: local('Arial');
+	font-weight: 400;
+	font-style: normal;
+	ascent-override: 85.26%;
+	descent-override: 23.11%;
+	line-gap-override: 0%;
+	size-adjust: 119.39%;
+}
+
+@font-face {
+	font-family: 'PT Sans Fallback';
+	src: local('Arial');
+	font-weight: 700;
+	font-style: normal;
+	ascent-override: 83.68%;
+	descent-override: 22.69%;
+	line-gap-override: 0%;
+	size-adjust: 121.66%;
+}
+
+
+
+
+
+
+:root {
+	--ink: #27343d;
+	--muted: #687780;
+	--paper: #f7f8f7;
+	--white: #fff;
+	--line: #d8e0e4;
+	--accent: #fcca14;
+	--ink-strong: #172121;
+	--accent-soft: #eceeeb;
+	--forest: #172121;
+	--navy-mid: #364241;
+	--font-body: 'PT Sans', 'PT Sans Fallback', Arial, sans-serif;
+	--font-display: 'PT Sans', 'PT Sans Fallback', Arial, sans-serif;
+	--grid-columns: 6;
+	--grid-gap: 20px;
+	--layout-width: 1920px;
+	/* Side gutter — fixed per breakpoint (not fluid): 20 below 1200, 35
+	   from 1200, 45 from 1600, 60 from 1920. Every block holds to this,
+	   no extra padding/margin of its own inside the grid. */
+	--container-padding: 20px;
+	--section-gap: 70px;
+}
+
+/* Vertical rhythm between sections: 80px at ≥1920, 70px across
+   1600/1200/700 (flat — same value, no interpolation needed), 60px at
+   360 and below. Same fluid clamp() technique as --container-padding. A
+   filled block's own internal padding reuses this same token, so the gap
+   between sections and the breathing room inside a coloured block always
+   match. */
+@media (min-width: 1600px) {
+	:root {
+		--section-gap: clamp(70px, calc(20px + 3.125vw), 80px);
+	}
+}
+
+@media (max-width: 700px) {
+	:root {
+		--section-gap: clamp(60px, calc(49.41px + 2.941vw), 70px);
+	}
+}
+
+
+
+@media (min-width: 700px) {
+	:root {
+		--container-padding: 20px;
+	}
+}
+
+@media (min-width: 1200px) {
+	:root {
+		--container-padding: 35px;
+	}
+}
+
+@media (min-width: 1600px) {
+	:root {
+		--container-padding: 45px;
+	}
+}
+
+@media (min-width: 1920px) {
+	:root {
+		--container-padding: 60px;
+	}
+}
+
+
+
+@media (max-width: 1200px) {
+	:root {
+		--grid-columns: 4;
+	}
+
+}
+
+
+
+@media (max-width: 760px) {
+	:root {
+		--grid-columns: 2;
+	}
+
+}
+
+
+
+@media (max-width: 520px) {
+	:root {
+		--grid-columns: 1;
+		--grid-gap: 16px;
+	}
+
+}
+

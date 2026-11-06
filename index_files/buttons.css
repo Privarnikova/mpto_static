@@ -1,0 +1,102 @@
+/* mpto theme — buttons */
+
+/* Plain pill — used for ordinary navigation actions (go to catalog, go to
+   contacts, etc). No arrow circle: that's reserved for .button--cta. */
+
+.button {
+	display: inline-flex;
+	align-items: center;
+	min-height: 52px;
+	padding-inline: 26px;
+	border: 0;
+	border-radius: 999px;
+	color: var(--ink-strong);
+	background: var(--accent);
+	font-family: var(--font-display);
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: .02em;
+	transition: background-color .2s ease, color .2s ease;
+}
+
+.button:hover { background: #e2bb1b; }
+
+.button:disabled { opacity: .65; cursor: wait; }
+
+.button--small { min-height: 42px; padding-inline: 20px; font-size: 11px; }
+
+.button--outline {
+	border: 1px solid var(--ink-strong);
+	color: var(--ink-strong);
+	background: transparent;
+}
+
+.button--outline:hover { background: rgb(23 33 33 / 6%); }
+
+.button--light {
+	border: 1px solid var(--paper);
+	color: var(--ink-strong);
+	background: var(--paper);
+}
+
+.button--light:hover { background: var(--accent-soft); }
+
+.button--outline-light {
+	border: 1px solid rgb(255 255 255 / 45%);
+	color: var(--white);
+	background: transparent;
+}
+
+.button--outline-light:hover { border-color: var(--white); background: rgb(255 255 255 / 10%); }
+
+.text-link::after { display: none; }
+
+/* CTA — reserved for the handful of buttons that actually open the lead
+   form (data-open-form). The button's own width never changes: arrow space
+   is reserved symmetrically on both sides so the label sits centred at
+   rest, and on hover the label slides left as the arrow fades/slides in
+   from the right, straight (not diagonal). Same mechanics on every real
+   conversion moment on the site. */
+
+.button--cta { position: relative; display: inline-flex; justify-content: center; padding-inline: 56px; }
+
+.button--cta .button__label {
+	display: inline-block;
+	transition: transform .35s cubic-bezier(.2, .8, .2, 1);
+}
+
+.button--cta:hover .button__label { transform: translateX(-14px); }
+
+.button--cta::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 8px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: var(--ink-strong);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12H19M13 6L19 12L13 18'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 16px;
+	opacity: 0;
+	transform: translateY(-50%) translateX(10px);
+	transition: opacity .3s ease, transform .35s cubic-bezier(.2, .8, .2, 1);
+}
+
+.button--cta:hover::after {
+	opacity: 1;
+	transform: translateY(-50%) translateX(0);
+}
+
+.button--outline-light.button--cta::after { background-color: rgb(255 255 255 / 20%); }
+
+.button--outline-light.button--cta:hover::after {
+	background-color: var(--accent);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23172121' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12H19M13 6L19 12L13 18'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.button--cta::after, .button--cta .button__label { transition: none; }
+}

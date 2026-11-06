@@ -1,0 +1,78 @@
+/* mpto theme — catalog */
+
+
+.product-detail { display: grid; grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr)); align-items: start; gap: var(--grid-gap); }
+
+.product-detail__content { grid-column: span 4; }
+
+.product-detail__aside { grid-column: span 2; }
+
+.product-detail__content { min-width: 0; }
+
+.product-detail__image { margin: 0 0 30px; }
+
+.product-detail__image img { display: block; width: 100%; height: auto; }
+
+.product-detail__aside { position: sticky; top: 24px; padding: 27px; background: var(--white); }
+
+.product-detail__aside h2 { margin: 0 0 12px; font-size: 25px; line-height: 1.15; }
+
+.product-detail__aside p:not(.eyebrow) { margin-bottom: 23px; color: var(--muted); font-size: 13px; }
+
+@media (max-width: 760px) {
+	.product-detail { grid-template-columns: 1fr; gap: 32px; }
+
+	.product-detail__aside { position: static; }
+}
+
+
+.mpto-article__date { display: block; margin-top: 14px; color: var(--muted); font-size: 13px; }
+
+.mpto-article__image { max-width: 1000px; max-height: 520px; margin-top: 38px; overflow: hidden; }
+
+.mpto-article__image img { display: block; width: 100%; max-height: 520px; object-fit: cover; }
+
+.mpto-article__content { max-width: 1000px; padding-block: 58px 100px; }
+
+@media (max-width: 760px) {
+	.mpto-article__content { padding-block: 38px 65px; }
+}
+
+
+.mpto-facts__grid, .mpto-about__layout, .mpto-contact__layout,
+.product-detail, .contacts-layout, .contact-form-layout, .site-footer__main {
+	grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+	gap: var(--grid-gap);
+}
+
+.product-detail__content { grid-column: span 4; }
+
+.product-detail__aside { grid-column: span 2; }
+
+
+@media (max-width: 1200px) {
+	.product-detail__content, .contacts-layout > .contact-card { grid-column: span 3; }
+
+	.product-detail__aside, .contacts-layout > .city-list { grid-column: span 1; }
+}
+
+
+
+@media (max-width: 760px) {
+	.product-detail, .contacts-layout, .contact-card, .contact-form-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+
+
+@media (max-width: 520px) {
+	.product-detail, .contacts-layout, .contact-card, .contact-form-layout,
+	.mpto-facts__grid, .mpto-about__layout, .mpto-contact__layout,
+	.site-footer__main { grid-template-columns: 1fr; }
+}
+
+
+
+@media (max-width: 760px) {
+	.mpto-article__content { padding-block: 38px 65px; }
+}
+

@@ -1,0 +1,59 @@
+/* mpto theme — layout */
+
+/* Every top-level page <main> is a flex column of full-bleed section
+   blocks, spaced by the real `gap` property (not padding inside each
+   block, not margin on individual sections) — a visible strip of the
+   page background between blocks, same vertical rhythm value at every
+   breakpoint via --section-gap. */
+main {
+	display: flex;
+	flex-direction: column;
+	gap: var(--section-gap);
+}
+
+.container, .mpto-shell {
+	display: grid;
+	grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+	column-gap: var(--grid-gap);
+	margin-inline: auto;
+}
+
+.container > *, .mpto-shell > * { grid-column: 1 / -1; }
+
+.breadcrumbs { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 55px; color: var(--muted); font-size: 11px; }
+
+.breadcrumbs a:hover { color: var(--ink-strong); }
+
+@media (max-width: 760px) {
+	.breadcrumbs { margin-bottom: 38px; }
+}
+
+
+.mpto-inner-hero .breadcrumbs { margin-bottom: 54px; }
+
+.mpto-inner-hero > .mpto-shell > p:last-child { max-width: 660px; margin: 22px 0 0; color: var(--muted); font-size: 16px; line-height: 1.7; }
+
+@media (max-width: 760px) {
+	.mpto-inner-hero .breadcrumbs { margin-bottom: 38px; }
+
+	.mpto-inner-hero > .mpto-shell > p:last-child { font-size: 14px; }
+}
+
+
+.mpto-inner-hero > .mpto-shell > p:last-child, .page-hero__lead { color: var(--muted); }
+
+
+@media (max-width: 760px) {
+	.mpto-inner-hero .breadcrumbs { margin-bottom: 38px; }
+
+	.mpto-inner-hero > .mpto-shell > p:last-child { font-size: 14px; }
+}
+
+
+
+.container,
+.mpto-shell {
+	width: 100%;
+	max-width: var(--layout-width);
+	padding-inline: var(--container-padding);
+}

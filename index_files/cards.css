@@ -1,0 +1,495 @@
+/* mpto theme — cards & homepage sections (below the hero) */
+
+.mpto-empty-state { margin: 0; padding: 24px 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+
+/* No blanket padding: the flex `gap` on <main> already spaces sections
+   apart. Padding here only belongs to a section that fills its own
+   background — it's never added "just because" to a plain white block. */
+
+.mpto-section-heading {
+	display: grid;
+	grid-template-columns: repeat(6, minmax(0, 1fr));
+	align-items: end;
+	gap: 20px;
+	margin-bottom: 52px;
+}
+
+.mpto-section-heading > div { grid-column: span 4; }
+
+.mpto-section-heading h2,
+.mpto-cta h2 {
+	margin: 9px 0 0;
+	color: var(--ink-strong);
+	font-size: clamp(30px, 4vw, 43px);
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: -.01em;
+}
+
+.mpto-section-heading > p {
+	grid-column: span 2;
+	width: 100%;
+	margin: 0;
+	color: var(--muted);
+	font-size: 14px;
+}
+
+.mpto-text-link {
+	display: block;
+	margin-top: auto;
+	padding-top: 15px;
+	border-top: 1px solid var(--line);
+	color: var(--ink-strong);
+	font-size: 13px;
+	font-weight: 700;
+}
+
+.mpto-text-link:hover { color: var(--muted); }
+
+/* Catalog directions — a plain editorial list (title, real excerpt, link,
+   one row per real catalog category), ruled by hairlines. No icons, no
+   panel backgrounds, no decorative texture, no card grid. On hover the
+   title and the link drift apart, away from each other. */
+
+.mpto-directions-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+
+.mpto-directions-list__item { border-bottom: 1px solid var(--line); }
+
+.mpto-directions-list__row {
+	display: grid;
+	grid-template-columns: minmax(240px, 360px) 1fr auto;
+	align-items: center;
+	gap: 28px;
+	width: 100%;
+	padding: 50px 24px;
+	color: inherit;
+	text-align: left;
+	background: none;
+	border: none;
+}
+
+.mpto-directions-list__row h3 {
+	margin: 0;
+	color: var(--ink-strong);
+	font-family: var(--font-display);
+	font-size: clamp(20px, 1.8vw, 26px);
+	font-weight: 600;
+	line-height: 1.15;
+	transition: transform .35s cubic-bezier(.2, .8, .2, 1), color .2s ease;
+}
+
+.mpto-directions-list__row p {
+	margin: 0;
+	color: var(--muted);
+	font-size: 14px;
+	line-height: 1.6;
+}
+
+.mpto-directions-list__link {
+	justify-self: end;
+	white-space: nowrap;
+	color: var(--ink-strong);
+	font-size: 13px;
+	font-weight: 700;
+	transition: transform .35s cubic-bezier(.2, .8, .2, 1), color .2s ease;
+}
+
+.mpto-directions-list__row:hover h3 { color: var(--muted); transform: translateX(-10px); }
+
+.mpto-directions-list__row:hover .mpto-directions-list__link { color: var(--muted); transform: translateX(10px); }
+
+/* The hero→directions curved seam (.mpto-curve) is parked in
+   wave.css, not used right now — it added a large gap the client
+   didn't want. The directions section's own top spacing comes from
+   .mpto-directions-section's --section-gap padding below, independent of
+   this. */
+
+/* Dispatch — a quiet dark banner, text only, no imagery: deliberate contrast
+   with the image-forward catalog tiles above it. Plain dark fill — same
+   ground as the hero, no texture. */
+
+.mpto-dispatch {
+	padding: var(--section-gap) 0;
+	color: var(--white);
+	background-color: var(--ink-strong);
+}
+
+.mpto-dispatch__grid {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	gap: 48px;
+	align-items: center;
+}
+
+.mpto-dispatch__col:first-child { grid-column: 1; }
+
+.mpto-dispatch__divider { grid-column: 2; }
+
+.mpto-dispatch__col:last-child { grid-column: 3; }
+
+.mpto-dispatch__col h3 {
+	margin: 0 0 14px;
+	color: var(--white);
+	font-family: var(--font-display);
+	font-size: clamp(22px, 2.4vw, 30px);
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: -.02em;
+}
+
+.mpto-dispatch__col p {
+	margin: 0 0 20px;
+	max-width: 480px;
+	color: #c3cbca;
+	font-size: 14px;
+	line-height: 1.65;
+}
+
+.mpto-dispatch__link {
+	display: inline-block;
+	color: var(--accent);
+	font-size: 13px;
+	font-weight: 700;
+}
+
+.mpto-dispatch__link:hover { color: var(--white); }
+
+.mpto-dispatch__divider { width: 1px; align-self: stretch; background: rgb(255 255 255 / 18%); }
+
+/* "Почему МПТО" — a ruled manifest list, not an equal-card grid. */
+
+.mpto-manifest-list { margin: 0; padding: 0; border-top: 1px solid var(--line); list-style: none; }
+
+.mpto-manifest-list__item {
+	display: grid;
+	grid-template-columns: repeat(6, minmax(0, 1fr));
+	gap: 20px;
+	padding: 24px 0;
+	border-bottom: 1px solid var(--line);
+}
+
+.mpto-manifest-list__item h3 {
+	grid-column: span 2;
+	margin: 0;
+	color: var(--ink-strong);
+	font-family: var(--font-display);
+	font-size: 19px;
+	font-weight: 600;
+	line-height: 1.25;
+}
+
+.mpto-manifest-list__item p {
+	grid-column: span 4;
+	margin: 0;
+	color: var(--muted);
+	font-size: 14px;
+	line-height: 1.6;
+}
+
+/* Geography — a branch map, not a text list: real cities placed at their
+   rough relative position (west/east, north/south), not a literal
+   geographic projection. Picking a city reuses the same [data-city-select]
+   wiring as the header switcher, so phone/email/address update everywhere
+   on the page at once. */
+
+.mpto-geography {
+	padding: var(--section-gap) 0;
+	color: var(--white);
+	background: var(--ink-strong);
+}
+
+.mpto-geography h2 {
+	margin: 9px 0 0;
+	color: var(--white);
+	font-size: clamp(30px, 4vw, 43px);
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: -.01em;
+}
+
+.mpto-geo {
+	display: grid;
+	grid-template-columns: minmax(0, .85fr) 340px;
+	/* Top-aligned, not centered: centering put the city name floating at
+	   the map's vertical middle with nothing anchoring it, reading as
+	   glued to the map box rather than its own content block. */
+	align-items: start;
+	gap: 72px;
+}
+
+.mpto-geo__canvas {
+	position: relative;
+	overflow: hidden;
+	/* Wide, short box by design (original height, kept on request).
+	   This no longer matches the map SVG's viewBox ratio, so
+	   `preserveAspectRatio="xMidYMid slice"` crops the viewBox to fill
+	   it — pin percentages in branch-map.php are computed to already
+	   account for exactly this crop (see mpto_branch_map_pin()'s
+	   comment), not for the raw viewBox. Changing this ratio without
+	   recomputing those percentages will throw every pin off again. */
+	aspect-ratio: 21 / 9;
+	border: 1px solid rgb(255 255 255 / 14%);
+	border-radius: 2px;
+}
+
+.mpto-geo__map {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* Fill comes from each path's own gradient (set inline, from the
+   client's Figma map data) — not overridden here. The seams between
+   adjacent regions read as borders on their own, from the dark page
+   background showing through the small gaps between hand-drawn paths;
+   no stroke needed. */
+
+.mpto-geo__pin {
+	/* No transform here, and no flex: the pin's own box must stay a
+	   fixed point at (left%, top%) no matter what the label does.
+	   Centering used to live on this element (as a flex row's
+	   translate(-50%,-50%)), so growing the label on hover/active (its
+	   pill padding) changed the row's total width and dragged the dot
+	   sideways with it — the "точка уезжает" bug. The dot alone now
+	   carries the positioning transform, sized to itself only; the
+	   label is anchored off the dot, so its size can never move it. */
+	position: absolute;
+	padding: 0;
+	color: var(--white);
+	background: none;
+	border: none;
+}
+
+/* Dark-on-light, not light-on-dark: this pin set sits on the client's
+   own gold map now, not a navy one, so the whole scheme is inverted
+   from the usual light-text-on-dark pattern — white-filled dots with a
+   dark ring, dark bold labels with a white halo, read reliably against
+   every shade of gold in the mosaic underneath. */
+.mpto-geo__dot {
+	position: absolute;
+	left: 0;
+	top: 0;
+	transform: translate(-50%, -50%);
+	width: 20px;
+	height: 20px;
+	border: 3px solid var(--ink-strong);
+	border-radius: 50%;
+	background: var(--white);
+	transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.mpto-geo__label {
+	position: absolute;
+	/* Dot radius (10px) + its border (3px) + actual breathing room —
+	   10px put the label flush against the dot's own edge, no visible
+	   gap at all. Only this offset changes; the dot's own position
+	   (left/top on .mpto-geo__pin, driven by inc/branch-map.php) stays
+	   exactly where it is. */
+	left: 26px;
+	top: 50%;
+	transform: translateY(-50%);
+	white-space: nowrap;
+	font-size: 17px;
+	font-weight: 700;
+	color: var(--ink-strong);
+	text-shadow: 0 1px 3px rgb(255 255 255 / 85%), 0 0 10px rgb(255 255 255 / 60%);
+	transition: color .2s ease, background-color .2s ease;
+}
+
+.mpto-geo__pin:hover .mpto-geo__dot,
+.mpto-geo__pin.is-active .mpto-geo__dot {
+	border-color: var(--white);
+	background: var(--ink-strong);
+	/* Keep the base translate(-50%,-50%) — overwriting it with just
+	   scale() here would re-anchor the dot at its top-left corner
+	   instead of its center, snapping it sideways on hover/select. */
+	transform: translate(-50%, -50%) scale(1.15);
+}
+
+.mpto-geo__pin:hover .mpto-geo__label,
+.mpto-geo__pin.is-active .mpto-geo__label {
+	color: var(--white);
+	text-shadow: none;
+	background: var(--ink-strong);
+	padding: 5px 12px;
+	border-radius: 999px;
+}
+
+.mpto-geo__details strong {
+	display: block;
+	margin-bottom: 10px;
+	font-family: var(--font-display);
+	font-size: clamp(22px, 2vw, 28px);
+	font-weight: 700;
+}
+
+.mpto-geo__details p {
+	margin: 0 0 22px;
+	color: #c3cbca;
+	font-size: 14px;
+	line-height: 1.6;
+}
+
+/* News — a plain row list: date, headline + excerpt, arrow. Hairlines
+   between rows, no card boxes. Shares the button component's own arrow
+   bubble so the "go" motion reads as one signature across the site. */
+
+.mpto-news-row-section__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	margin-bottom: clamp(24px, calc(4px + 1.5vw), 32px);
+}
+
+.mpto-news-row-section__head h2 {
+	margin: 0;
+	color: var(--ink-strong);
+	font-family: var(--font-display);
+	font-size: clamp(30px, 3.2vw, 38px);
+	font-weight: 600;
+}
+
+.mpto-news-row-section__all { flex: 0 0 auto; color: var(--ink-strong); font-size: 13px; font-weight: 700; }
+
+.mpto-news-row-section__all:hover { color: var(--muted); }
+
+.mpto-news-row-list { margin: 0; padding: 0; list-style: none; }
+
+/* The floating preview image (.mpto-news-preview, news-preview.css) is
+   positioned over this list, not inside a grid column — an earlier
+   version reserved a column for it here, which forced every row to
+   grow tall enough to fit the image even though the image is free to
+   overlap neighbouring rows. Rows stay this one simple 3-column shape
+   whether or not any row actually has a thumbnail. */
+.mpto-news-row {
+	display: grid;
+	grid-template-columns: 110px 1fr 40px;
+	align-items: center;
+	gap: 24px;
+	padding: 34px 0;
+	border-bottom: 1px solid var(--line);
+	color: var(--ink);
+}
+
+.mpto-news-row__date { color: var(--muted); font-size: 13px; }
+
+.mpto-news-row__text { display: block; min-width: 0; max-width: 820px; }
+
+.mpto-news-row__text strong { margin-right: 10px; color: var(--ink-strong); font-size: 17px; font-weight: 600; }
+
+.mpto-news-row__text span { color: var(--muted); font-size: 14px; }
+
+.mpto-news-row__arrow {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: var(--paper);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23172121' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17L17 7M17 7H9M17 7V15'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 16px;
+	transition: transform .3s cubic-bezier(.2, .8, .2, 1), background-color .2s ease;
+}
+
+.mpto-news-row:hover .mpto-news-row__arrow {
+	transform: translateX(3px) rotate(45deg);
+	background-color: var(--accent);
+}
+
+/* Final CTA */
+
+.mpto-cta { padding: var(--section-gap) 0; background: var(--accent); }
+
+.mpto-cta__inner { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); align-items: center; gap: 20px; }
+
+.mpto-cta__inner > div { grid-column: span 4; }
+
+.mpto-cta h2 { max-width: 700px; margin: 9px 0 10px; color: var(--ink-strong); font-size: clamp(30px, 4vw, 40px); }
+
+.mpto-cta p { margin: 0; color: #594415; font-size: 14px; }
+
+.mpto-cta .button {
+	grid-column: span 2;
+	justify-self: end;
+	flex: 0 0 auto;
+	border-color: var(--ink-strong);
+	color: var(--white);
+	background: var(--ink-strong);
+}
+
+.mpto-cta .button:hover { border-color: var(--navy-mid); background: var(--navy-mid); }
+
+/* Responsive */
+
+@media (max-width: 1200px) {
+	.mpto-section-heading > div,
+	.mpto-section-heading > p { grid-column: span 2; }
+
+	.mpto-geo { grid-template-columns: minmax(0, 1fr); }
+
+	.mpto-cta__inner > div { grid-column: span 3; }
+
+	.mpto-cta .button { grid-column: span 1; }
+
+	.mpto-manifest-list__item h3 { grid-column: span 2; }
+
+	.mpto-manifest-list__item p { grid-column: span 4; }
+}
+
+@media (max-width: 760px) {
+	.mpto-directions-list__row {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 8px;
+		padding: 24px 0;
+	}
+
+	.mpto-directions-list__link { justify-self: start; }
+}
+
+@media (max-width: 900px) {
+	.mpto-dispatch__grid { grid-template-columns: 1fr; gap: 40px; }
+
+	.mpto-dispatch__col:first-child,
+	.mpto-dispatch__col:last-child { grid-column: 1; }
+
+	.mpto-dispatch__divider { display: none; }
+}
+
+@media (max-width: 760px) {
+	.mpto-section-heading > div,
+	.mpto-section-heading > p { grid-column: 1 / -1; }
+
+	.mpto-section-heading { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-bottom: 28px; }
+
+	.mpto-manifest-list__item { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+
+	.mpto-manifest-list__item h3,
+	.mpto-manifest-list__item p { grid-column: 1 / -1; }
+
+	.mpto-cta__inner { grid-template-columns: minmax(0, 1fr); }
+
+	.mpto-cta__inner > div,
+	.mpto-cta .button { grid-column: 1 / -1; justify-self: start; }
+}
+
+@media (max-width: 608px) {
+	.mpto-news__title { margin-bottom: 0; }
+
+	.mpto-news__item { grid-template-columns: minmax(0, 1fr); row-gap: 12px; padding: 32px 0; }
+
+	.mpto-news__date,
+	.mpto-news__content { grid-column: 1 / -1; }
+
+	.mpto-news__content { gap: 24px; }
+
+	.mpto-news__footer { grid-template-columns: minmax(0, 1fr); margin-top: 32px; }
+
+	.mpto-news__footer a { grid-column: 1 / -1; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+	.button { transition: none; }
+}

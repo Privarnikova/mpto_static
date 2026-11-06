@@ -1,0 +1,89 @@
+/* mpto theme — hover preview panel for the homepage directions list.
+   The list runs full-width; a single floating panel is centred exactly on
+   the cursor while a row is hovered (own implementation — cursor-tracking
+   only, no markup copied from any reference). Switching rows slides the
+   new image in and the old one out, top-to-bottom or bottom-to-top
+   depending on which row the pointer moved toward. Desktop-only — on
+   narrow viewports the plain list speaks for itself. */
+
+.mpto-directions {
+	position: relative;
+}
+
+.mpto-directions-preview {
+	display: none;
+}
+
+@media (min-width: 1100px) {
+	.mpto-directions-preview {
+		display: block;
+		position: fixed;
+		z-index: 60;
+		top: 0;
+		left: 0;
+		width: 460px;
+		height: 380px;
+		padding: 22px;
+		pointer-events: none;
+		background: var(--ink-strong);
+		border-radius: 2px;
+		opacity: 0;
+		will-change: transform;
+		transition: opacity .25s ease;
+	}
+
+	.mpto-directions-preview.is-active { opacity: 1; }
+}
+
+.mpto-directions-preview__frame {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.mpto-directions-preview__media {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transform: translateY(0);
+	transition: transform .5s cubic-bezier(.4, 0, .2, 1), opacity .3s ease;
+}
+
+.mpto-directions-preview__media.is-current { opacity: 1; z-index: 2; }
+.mpto-directions-preview__media.is-enter-down { transform: translateY(100%); }
+.mpto-directions-preview__media.is-enter-up { transform: translateY(-100%); }
+.mpto-directions-preview__media.is-exit-down { opacity: 0; transform: translateY(-100%); z-index: 1; }
+.mpto-directions-preview__media.is-exit-up { opacity: 0; transform: translateY(100%); z-index: 1; }
+
+.mpto-directions-preview__icon {
+	width: 36%;
+	color: rgb(255 255 255 / 15%);
+}
+
+.mpto-directions-preview__icon svg { width: 100%; height: 100%; }
+
+.mpto-directions-preview__image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: saturate(.9) brightness(.82);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.mpto-directions-preview { transition: none; }
+
+	.mpto-directions-preview__media {
+		transition: opacity .2s ease;
+	}
+
+	.mpto-directions-preview__media.is-enter-down,
+	.mpto-directions-preview__media.is-enter-up,
+	.mpto-directions-preview__media.is-exit-down,
+	.mpto-directions-preview__media.is-exit-up {
+		transform: translateY(0);
+	}
+}
